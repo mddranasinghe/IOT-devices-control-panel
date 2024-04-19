@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     .gui{width: 100%;height: 500px;  background-image: url('4.jpeg');background-size: cover;}
+    
+ @keyframes grow {
+  from {
+    height: 0%
+  }
+  to {
+    height: 100%;
+  }
+}
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background:white; font-family: 'Avenir';
+
+  font-family: sans-serif;
+}
+#container {
+  position: relative;
+  width: 10vw;
+  top: 10%;
+/*  left: 50%;
+  transform: translate3d(-50%, -50%, 0);*/
+  margin: 0 auto;
+}
+input {
+  display: none;
+}
+#container label {
+  position: relative;
+  display: block;
+  width: 10vw;
+  height :300px;
+  background: transparent;
+  border-radius: 0.4rem;
+  border: 4px solid white;
+  overflow: hidden;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  box-shadow: -2px 4px 8px 4px rgba(white, 0.6);
+  border-image: linear-gradient(to top, green 20%, orange 70%, red 100%) 1; /* Set border image with linear gradient */
+
+
+div {
+    position: absolute;
+    bottom:0;
+    left: 0;
+    background: linear-gradient(to bottom, #A3E2EF 35%, #4F9CC0);
+    height:100%;
+    width: 100%;
+    animation: grow 2s forwards;
+    box-shadow: 0 0 8px 1px white inset;
+    bottom: 0 auto;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height:50% ;
+      position: absolute;
+      bottom:0;
+      left: 0;
+     /* background: url(bubbles-mask.gif);*/
+     background-color: blue;
+      mix-blend-mode: overlay;
+      opacity: 2;
+    }
+
+
+  }
+}
+
+.level {
+  position: absolute;
+
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 0.7rem;
+  margin-left: -80px;
+  top: 90%;
+  color:green
+}
+
+.level:nth-of-type(2) {
+  margin-left: -115px;
+  top: 45%;
+  color: #FF9200
+}
+
+.level:nth-of-type(3) {
+  margin-left: -115px;
+  top: 20%;
+  color:  #FF3827
+}
+.level:nth-of-type(4) {
+  margin-left: -85px;
+  top: -4%;
+  color: rgb(180, 4, 4);
+}
+
+.toggle { position: relative; box-sizing: border-box;}
+.toggle input[type="checkbox"] {
+  position: absolute;
+  left: 2px;
+  top: 0;
+ /* z-index: 10;*/
+  width: 85%;
+  height: 70%;
+  cursor: pointer;
+  opacity: 0;}
+
+.toggle label {
+  position: relative;
+  display: block;
+  align-items: center;
+  box-sizing: border-box;}
+
+.toggle label:before {
+  content: '';
+  width: 50px;
+  height: 22px;
+  background: #ccc;
+  position: relative;
+  display: inline-block;
+  border-radius: 46px;
+  box-sizing: border-box;
+  transition: 0.2s ease-in;
+}
+.toggle label:after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  z-index: 2;
+  background: #fff;
+  box-sizing: border-box;
+  transition: 0.2s ease-in;
+}
+.toggle input[type="checkbox"]:checked + label:before { background: #4BD865;}
+.toggle input[type="checkbox"]:checked + label:after {left: 30px;}
+
+
+
+.Ac,.Al { width:100%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px 3px;}
+.status_box {
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color:white;
+        display: flex; /* Use flexbox to align children */
+         align-items: center; }
+
+.topic {flex: 1;} 
+.option { margin-left: center;} /* Push to the right */
+
+
+
+.popup {
+  width: 70%;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius:20px;
+ 
+    z-index: 9999;
+}
+
+.popup-content {
+    text-align: center;
+}
+.pop_button{width: 100%; border-top:solid; border-width: .5px; border-color:gray; position:relative;}
+
+#yesButton, #noButton {
+width: 49%;  
+height: 47px;
+ border-left: solid;
+ border-color: gray;
+ border-width: 0.5px;
+float: right;
+color:blue;
+  }
+#yesButton{border-left: none; color:red}
+.pop_button p{ text-align:center; margin-bottom: 10px;}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9998;
+  cursor: pointer;
+}
+</style>
+
+
+</head>
+<body>
+    <div class="gui">
+    <table style="width: 100%;"><tr>
+        <td><a href="../index.html"><img src="../resources\image\less-than.png" style="width: 30px; height: 35px;"></a></td>
+        <td style="text-align: center; width:100%;"><h2 >Flood Monitoring Systems</h2></td>
+      </tr></table>
+  
+
+        <div id="container">
+            <input type="checkbox" id="water"/>
+            <label for="water">
+              <div id="fill"></div>
+            </label>
+       
+            <span class="level">Low Level-</span>
+            <span class="level">Warning Level-</span>
+            <span class="level">Critical Level-</span>
+            <span class="level">high Level-</span>
+           
+        <!-- <span id="progress">0%</span>-->
+          </div>
+
+    </div>
+      <div style="width: 95%; margin: 0 auto;">
+    <p style="color:grey; margin-bottom: 3px; margin-top: 30px;"><b>Alert</b></p>
+    
+    <div class="Al">
+    <div class="status_box">
+        <div class="topic"><p>Critical Level Alert</p></div>
+        <div class="option">  <div class="toggle">
+        <input type="checkbox" id="c_al" onclick="actionClose('c_al')" ><label for="c_al" ></label></div> 
+     </div>
+    </div>
+
+    <div class="status_box">
+        <div class="topic"><p>Warning Level Alert</p></div>
+        <div class="option">  <div class="toggle">
+        <input type="checkbox" id="w_al" onclick="actionClose('w_al')" ><label for="w_al" ></label></div> 
+     </div>
+    </div>
+</div>
+    
+<p style="color:grey; margin-bottom: 3px; margin-top: 30px;"><b>Action</b></p>
+
+                 <div class="Ac">
+           
+                     <div class="status_box">
+                        <div class="topic"><p>Critical Level  Action</p></div>
+                        <div class="option">  <div class="toggle">
+                        <input type="checkbox" id="c_ac" onclick="actionClose('c_ac')" checked><label for="c_ac" ></label></div> 
+                     </div>
+                    </div>
+                    <div class="status_box">
+                        <div class="topic"><p>Warning Level  Action</p></div>
+                        <div class="option">  <div class="toggle">
+                        <input type="checkbox" id="w_ac" onclick="actionClose('w_ac')" ><label for="w_ac" ></label></div> 
+                     </div>
+                    </div>
+
+                </div>
+               
+</div> 
+<div id="popup" class="popup">
+  <div style="padding: 20px;">   <div class="popup-content">
+    <p>Are you sure you want to perform this action?</p>  </div></div>
+<div class="pop_button">
+    <div id="noButton"><p>No</p></div>
+      <div id="yesButton"><p>Yes</p></div></div>
+</div>
+<div id="overlay"></div>
+
+<script>
+
+var id1Value,id1,
+payload, companyID="node", deviceType="wlc",deviceID="8469308fcf871dad4d4" ;
+var publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/";// publish topic
+var subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe topic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var payload
+  function actionClose(id1){
+    var checkbox = document.getElementById(id1)
+    if (!checkbox.checked) {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById("overlay").style.display = "block";
+        
+    }
+    else{
+      payload="1";
+    }
+    id1Value=id1;
+    console.log(payload);
+  }
+document.getElementById('yesButton').addEventListener('click', function() {
+ 
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById("overlay").style.display = "none";
+    if (id1Value) {
+        document.getElementById(id1Value).checked = false;
+        payload="0";
+    }
+    console.log(payload);
+});
+
+document.getElementById('noButton').addEventListener('click', function() {
+
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById("overlay").style.display = "none";
+    if (id1Value) {
+        document.getElementById(id1Value).checked = true;
+        payload="1";
+    }
+    console.log(payload);
+});
+
+
+
+    </script>
+</body>
+
+</html>
