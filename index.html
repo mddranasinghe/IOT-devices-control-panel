@@ -62,7 +62,9 @@ p.zone{ font-size: 10px; padding-top: 3px;}
   #waterpump.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
   #powerSource.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
   #flood.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
-
+  #cctv.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
+  #smoke.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
+  #siren.hover-effect{box-shadow: none; opacity: 0.2; background-color: #EEEEEE; }
   .popup {
     width: 80%;
   display: none; 
@@ -121,21 +123,37 @@ p.zone{ font-size: 10px; padding-top: 3px;}
                 <img src="resources\image\pw.jpg" class="img_td" alt="Power">
             </div><p class="device_name">Power Source</p><p class="zone">Home</p></td>
         </tr>
-        <tr><td id="homesiren" ontouchstart="addHoverClass('homesiren')" ontouchend="removeHoverClass('homesiren')"><div class="dot" id="" style="width: 5px; height: 5px; float:left;background-color:#7BDD0A""></div>  <div class="img-container">
+        <tr><td id="siren" ontouchstart="addHoverClass('siren')" ontouchend="removeHoverClass('siren')"><div class="dot" id="" style="width: 5px; height: 5px; float:left;background-color:#7BDD0A"></div>  <div class="img-container">
                 <img src="resources\image\siren.svg" class="img_td" alt="siren">
-            </div><p class="device_name"> Home Siren</p><p class="zone">home</p></td>  
+            </div><p class="device_name"> Home Siren</p><p class="zone">Home</p></td>  
         
         
-            <td id="flood" ontouchstart="addHoverClass('Flood')" ontouchend="removeHoverClass('Flood')"><div class="dot" id=""style="width: 5px; height: 5px; float:left;background-color:#7BDD0A""></div>  <div class="img-container">
+            <td id="flood" ontouchstart="addHoverClass('flood')" ontouchend="removeHoverClass('flood')"><div class="dot" id=""style="width: 5px; height: 5px; float:left;background-color:#7BDD0A"></div>  <div class="img-container">
                 <img src="resources\image\wl.png" class="img_td" alt="cctv">
             </div><p class="device_name"> Flood Level </p><p class="zone">Graden</p></td>
         </tr>   
 
         <tr>  
-      <td id="" style="opacity: 0.5;" onclick="openPopup()" ><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div>  <div class="img-container">
-          <img src="resources\image\smoke.jpg" class="img_td" alt="cctv">
-      </div><p class="device_name"> Smoke Detector </p><p class="zone">Home</p></td>
+
+          
+      <td id="smoke" ontouchstart="addHoverClass('smoke')" ontouchend="removeHoverClass('smoke')" ><div class="dot" id=""style="width: 5px; height: 5px; float:left;background-color:#7BDD0A"></div>  <div class="img-container">
+        <img src="resources\image\smoke.jpg" class="img_td" alt="cctv">
+    </div><p class="device_name"> Smoke Detector </p><p class="zone">Home</p></td>
+
+      <td id="cctv" ontouchstart="addHoverClass('cctv')" ontouchend="removeHoverClass('cctv')"><div class="dot" id=""style="width: 5px; height: 5px; float:left;background-color:#7BDD0A"></div>  <div class="img-container">
+          <img src="resources\image\cctv\cam.png" class="img_td" alt="cctv">
+      </div><p class="device_name"> CCTV Bridge </p><p class="zone">Home</p></td>
+
   </tr>   
+
+  <tr>  
+
+
+    <td id="" style="opacity: 0.5;" onclick="openPopup()" ><div class="dot" id=""style="width: 5px; height: 5px; float:left"></div>  <div class="img-container">
+        <img src="resources\image\vehicle.png" class="img_td" alt="cctv">
+    </div><p class="device_name"> GPS Tracker </p><p class="zone">Home</p></td>
+
+</tr>
     </table>
         <div class="dotdiv">
             <div class="dotConnction" id="page1"style="width: 10px; height: 10px;"></div>
@@ -218,7 +236,10 @@ try{
 document.getElementById("waterpump").onclick=function(){location.href="controller/waterpump.html"}
 document.getElementById("powerSource").onclick=function(){location.href="controller/powerSource.html"}
 document.getElementById("flood").onclick=function(){location.href="controller/flood.html"}
-document.getElementById("homesiren").onclick=function(){location.href="controller/siren.html"}
+document.getElementById("siren").onclick=function(){location.href="controller/siren.html"}
+document.getElementById("smoke").onclick=function(){location.href="controller/smoke.html"}
+document.getElementById("cctv").onclick=function(){location.href="controller/cctv.html"}
+
    function addHoverClass(id) {
     document.getElementById(id).classList.add('hover-effect');
 }

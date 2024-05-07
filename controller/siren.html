@@ -10,53 +10,61 @@
             position: relative;
             width: 70%; /* Adjust container width as needed */
             margin: 0 auto;
-          /*  border: 15px solid #BBCDD9;
+          /* border: 15px solid #BBCDD9;
             border-radius:0 ;*/
-            background-color: aquamarine;
+  
             
         }
 
         #image {
             width: 100%;
-            display: block;
-            margin: 0 auto;
+            position:relative;
           
         }
 
         .siren1 {
-            position: absolute;
-            top: 5%;
-            left: 51.5%;
+         
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:51.5%; top:1%;
+            border-radius: 2vw;
+            border-width: .5vw;
+            border-color: gray;
+
             transform: translateX(-50%);
+
         }
 
         .siren2 {
-            position: absolute;
-            bottom: 52%;
-            right: 0;
-        }
+        
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:98%; top:32%;
+            border-radius: 2vw;
+            border-width: .5vw;
+            border-color: gray;
 
+            transform: translateX(-50%);
+       
+        }
         .siren3 {
-            position: absolute;
-            bottom: 50%;
-            left: 0%;
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:45.5%; top:80%;
+            border-radius: 2vw;
+            border-width: .5vw;
+            border-color: gray;
+
+            transform: translateX(-50%);
+      
         }
 
         .siren4 {
-            position: absolute;
-            bottom: 9%;
-            right: 54.5%;
-            transform: translateX(50%);
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:2%; top:33.5%;
+            border-radius: 2vw;
+            border-width: .5vw;
+            border-color: gray;
+            transform: translateX(-50%);
+         
+          
+         
         }
 
-        .home {
-            width: 10vw;
-            height: 10vw;
-            display: block;
-            margin: 0 auto;
-            position: absolute;
-        }
-
+        .dot{position: absolute;width: 1vw; height: 1vw; background-color:red ;top: 82%; left: 77%; border-radius:50%;}
         
         .popup {
             width: 70%;
@@ -102,6 +110,84 @@ color:blue;
   cursor: pointer;
 }
 
+/* toggle botton..............................*/
+.toggle { position: relative; box-sizing: border-box;}
+.toggle input[type="checkbox"] {
+  position: absolute;
+  left: 2px;
+  top: 0;
+ /* z-index: 10;*/
+  width: 85%;
+  height: 70%;
+  cursor: pointer;
+  opacity: 0;}
+
+.toggle label {
+  position: relative;
+  display: block;
+  align-items: center;
+  box-sizing: border-box;}
+
+.toggle label:before {
+  content: '';
+  width: 50px;
+  height: 22px;
+  background: #ccc;
+  position: relative;
+  display: inline-block;
+  border-radius: 46px;
+  box-sizing: border-box;
+  transition: 0.2s ease-in;
+}
+.toggle label:after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  z-index: 2;
+  background: #fff;
+  box-sizing: border-box;
+  transition: 0.2s ease-in;
+}
+.toggle input[type="checkbox"]:checked + label:before { background: #4BD865;}
+.toggle input[type="checkbox"]:checked + label:after {left: 30px;}
+
+
+
+.Ac,.Al { width:100%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px 3px;}
+.status_box {
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color:white;
+        display: flex; /* Use flexbox to align children */
+         align-items: center; }
+
+.topic {flex: 1;} 
+.option { margin-left: center;} /* Push to the right */
+
+
+
+.popup2 {
+    width: 80%;
+  display: none; 
+  position: fixed;
+  top: 90%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  border-radius: 10px 10px;
+  background-color:#7D63BE;
+  padding: 12px 12px 12px 12px;
+  z-index: 9999; 
+  color: white;
+
+ 
+}
+
+
+.popup2-content {text-align: center; margin-bottom:0%; }
 
     </style>
 </head>
@@ -114,8 +200,9 @@ color:blue;
     </table>
 
 
-    <svg  height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" display="none">        <!-- Alarm Icon -->
+    <svg  height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" display="none">        <!-- Alarm Icon -->
         <symbol id="alarm-icon" viewBox="0 0 346.013 346.013">
+            
 <g>
             <path d="M261.752,242.918c-2.429-2.128-4.723-4.138-5.832-6.133c-0.088-0.161-0.184-0.324-0.32-0.549
             c-4.244-6.792-5.837-23.742-6.788-33.866c-0.142-1.521-0.279-2.975-0.416-4.336c-0.014-0.138-0.03-0.274-0.058-0.482
@@ -143,35 +230,68 @@ color:blue;
             s4.204,15.889,12.379,17.227c8.58,1.405,16.186,5.57,21.994,12.045c5.746,6.406,9.057,14.333,9.575,22.923
             c0.48,7.962,7.087,14.097,14.959,14.097c0.304,0,0.609-0.009,0.917-0.027c8.27-0.499,14.568-7.606,14.069-15.876
             C291.908,111.27,285.803,96.657,275.636,85.321z"/>
+
         </g>
+        
         </symbol>
-        <!-- Add more symbols for other icons if needed -->
     </svg>
 
 
 
 
 
-    <div class="container2">
+   
     <div class="container">
-        <div > <svg class="siren1 home" id='s1' fill="green"onclick="actionClose('s1')">
-            <use xlink:href="#alarm-icon"></use>
-        </svg></div>
-        <div > <svg class="siren2 home" id='s2' fill="green"onclick="actionClose('s2')">
-            <use xlink:href="#alarm-icon"></use>
-        </svg></div>
-        <div> <svg class="siren3 home" id='s3' fill="green"onclick="actionClose('s3')">
-            <use xlink:href="#alarm-icon"></use>
-        </svg></div>
-        <div> <svg class="siren4 home" id='s4' fill="green"onclick="actionClose('s4')">
-            <use xlink:href="#alarm-icon"></use>
-        </svg></div>
-      
         <img id="image" src="../resources\image\i.jpg">
-    </div></div>
+        <div style="" class="siren1">
+            <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); height: 70%; display:non " id='s1' fill="green" onclick="actionClose('s1','m1')">
+                <use xlink:href="#alarm-icon"></use>
+            </svg>
+            <img src="unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m1">
+        
+            <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
+        </div>
+           
+            <div style="" class="siren2">
+                <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s2' fill="green" onclick="actionClose('s2','m2')">
+                    <use xlink:href="#alarm-icon"></use>
+                </svg>
+                <img src="unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m2">
+                <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
 
+            </div>
+   
 
-
+            <div style="" class="siren3">
+                <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s3' fill="green" onclick="actionClose('s3','m3')">
+                    <use xlink:href="#alarm-icon"></use>
+                </svg>
+                <img src="unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m3">
+                <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
+            </div>
+       
+                <div style="" class="siren4">
+                    <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s4' fill="green" onclick="actionClose('s4','m4')">
+                        <use xlink:href="#alarm-icon"></use>
+                    </svg>
+                    <img src="unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m4">
+                    <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
+                </div>
+    
+       
+            </div>
+<br><br>
+            <div style="width: 95%; margin: 0 auto;">
+                
+                <div class="Al">
+                <div class="status_box">
+                    <div class="topic"><p>Sirenes Action</p></div>
+                    <div class="option">  <div class="toggle">
+                    <input type="checkbox" id="S_Ac" onclick="acAll('S_Ac')" ><label for="S_Ac" ></label></div> 
+                 </div>
+                </div>
+          
+            </div>
     <div id="popup" class="popup">
         <div style="padding: 20px;">   <div class="popup-content">
           <p>Are you sure you want to disarmed this siren?</p>  </div></div>
@@ -181,49 +301,96 @@ color:blue;
       </div>
       <div id="overlay"></div>
 
+      <div id="popup2" class="popup2" >
+        <div class="popup2-content" >
+          <p style=" font-size: 12px;">siren.................................!</p>
 
+        </div>
+      </div>
 
     
     <script>
 
-var payload
-  function actionClose(id1){
-    var checkbox = document.getElementById(id1)
-    if (!checkbox.checked) {
+var payload;
+  function actionClose(id1,img){
+
         document.getElementById('popup').style.display = 'block';
         document.getElementById("overlay").style.display = "block";
-     //   document.getElementById(id1).style.opacity = 0.5;
+    
 
-        
-    }
-    else{
-      payload="1";
-    }
+    
     id1Value=id1;
-    console.log(payload);
+    idimg=img;
+   console.log('ddd'+img);
   }
 document.getElementById('yesButton').addEventListener('click', function() {
  
     document.getElementById('popup').style.display = 'none';
     document.getElementById("overlay").style.display = "none";
-    if (id1Value) {
-        document.getElementById(id1Value).style.fill = 'gray'; 
-
-      //  payload="0";
+    if (id1Value != 'all') {
+        document.getElementById(id1Value).style.display = "none"; 
+        document.getElementById(idimg).style.display = "inline"; 
     }
-  //  console.log(payload);
+    else if(id1Value === 'all')
+  {
+    for (var i = 1; i < 5; i++) {
+  
+  document.getElementById(('s' + i)).style.display = "none"; 
+  document.getElementById(('m' + i)).style.display = "inline";
+}
+  }
+  openPopup()
 });
 
 document.getElementById('noButton').addEventListener('click', function() {
 
     document.getElementById('popup').style.display = 'none';
     document.getElementById("overlay").style.display = "none";
-    if (id1Value) {
+    if (id1Value === 'all') {
        // document.getElementById(id1Value).checked = true;
        // payload="1";
     }
-    //console.log(payload);
+    else if(id1Value === 'all')
+  {
+   
+  }
+
 });
+
+function acAll(id)
+{
+
+    var checkbox = document.getElementById(id)
+    if (!checkbox.checked) {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById("overlay").style.display = "block";
+
+        id1Value='all';
+    }
+    else if(checkbox.checked)
+    {
+        for (var i = 1; i < 5; i++) {
+  
+    document.getElementById(('s' + i)).style.display = "inline"; 
+    document.getElementById(('m' + i)).style.display = "none";
+
+  //  openPopup();
+}
+
+    }
+
+}
+
+// Function to opne the popup
+function openPopup() {
+  var popup = document.getElementById("popup2");
+  popup.style.display = "block";
+
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 1300); 
+  
+}
 
     </script>
 </body>
