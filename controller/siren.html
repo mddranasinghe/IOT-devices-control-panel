@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="data:,">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-     body{touch-action: pan-y;}
+     .container_main{box-shadow: 0.5px 0.5px 3px 0.5px gray; width: 95%; height: 85vw; position:relative; margin: 0 auto;}
         .container {
-            position: relative;
-            width: 70%; /* Adjust container width as needed */
+            position:relative;
+            width: 70%;
             margin: 0 auto;
-          /* border: 15px solid #BBCDD9;
-            border-radius:0 ;*/
-  
+          /*border: 15px solid #BBCDD9;
+            border-radius:0 ;
+       
+            left:15%;*/
+            top:11%;
             
         }
 
@@ -25,7 +26,7 @@
 
         .siren1 {
          
-            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:51.5%; top:1%;
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:51.5%; top:0%;
             border-radius: 2vw;
             border-width: .5vw;
             border-color: gray;
@@ -36,7 +37,7 @@
 
         .siren2 {
         
-            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:98%; top:32%;
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:99%; top:32%;
             border-radius: 2vw;
             border-width: .5vw;
             border-color: gray;
@@ -45,7 +46,7 @@
        
         }
         .siren3 {
-            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:45.5%; top:80%;
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:45.5%; top:79.7%;
             border-radius: 2vw;
             border-width: .5vw;
             border-color: gray;
@@ -55,7 +56,7 @@
         }
 
         .siren4 {
-            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:2%; top:33.5%;
+            border-style: solid; width: 12vw; height: 12vw; position: absolute; left:1.5%; top:33.5%;
             border-radius: 2vw;
             border-width: .5vw;
             border-color: gray;
@@ -97,19 +98,7 @@ color:blue;
 #yesButton{border-left: none; color:red}
 .pop_button p{ text-align:center; margin-bottom: 10px;}
 
-#overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 9998;
-  cursor: pointer;
-}
+
 
 /* toggle botton..............................*/
 .toggle { position: relative; box-sizing: border-box;}
@@ -158,7 +147,7 @@ color:blue;
 
 
 
-.Ac,.Al { width:100%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px 3px;}
+.Ac,.Al { width:100%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px 3px; position: relative;}
 .status_box {
         padding-left: 20px;
         padding-right: 20px;
@@ -189,6 +178,41 @@ color:blue;
 
 
 .popup2-content {text-align: center; margin-bottom:0%; }
+
+.custom-select select {
+    border: 1px solid gray; /* Set border color to green */
+    border-radius: 5px; /* Optional: Add border radius */
+    padding: 5px; /* Optional: Add padding */
+
+    color:black;
+}
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9998;
+  cursor: pointer;
+}
+
+#overlay,#overlay2 {
+  /*   position: fixed;*/
+     display:none;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 9998;
+     cursor: pointer;
+   /*  position: absolute;*/
+   
+    }
 
     </style>
 </head>
@@ -240,15 +264,16 @@ color:blue;
 
 
 
-
    
-    <div class="container">
-        <img id="image" src="../resources\image\i.jpg">
-        <div style="" class="siren1">
+    <div class="container_main" >
+   
+    <div class="container" >
+        <img id="image" src="../resources\image\siren\i.jpg">
+        <div class="siren1">
             <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); height: 70%; display:non " id='s1' fill="green" onclick="actionClose('s1','m1')">
                 <use xlink:href="#alarm-icon"></use>
             </svg>
-            <img src="../resources\image\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m1">
+            <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m1">
         
             <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
         </div>
@@ -257,30 +282,33 @@ color:blue;
                 <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s2' fill="green" onclick="actionClose('s2','m2')">
                     <use xlink:href="#alarm-icon"></use>
                 </svg>
-                <img src="../resources\image\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m2">
+                <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m2">
                 <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
 
             </div>
    
 
-            <div style="" class="siren3">
+            <div  class="siren3">
                 <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s3' fill="green" onclick="actionClose('s3','m3')">
                     <use xlink:href="#alarm-icon"></use>
                 </svg>
-                <img src="../resources\image\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m3">
+                <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m3">
                 <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
             </div>
        
-                <div style="" class="siren4">
+                <div class="siren4">
                     <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s4' fill="green" onclick="actionClose('s4','m4')">
                         <use xlink:href="#alarm-icon"></use>
                     </svg>
-                    <img src="../resources\image\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m4">
+                    <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m4">
                     <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
                 </div>
     
-       
+              
             </div>
+
+            <div id="overlay"></div>
+          </div>
 <br><br>
             <div style="width: 95%; margin: 0 auto;">
                 
@@ -288,11 +316,39 @@ color:blue;
                 <div class="status_box">
                     <div class="topic"><p>Sirenes Action</p></div>
                     <div class="option">  <div class="toggle">
-                    <input type="checkbox" id="S_Ac" onclick="acAll('S_Ac')" checked ><label for="S_Ac" ></label></div> 
+                    <input type="checkbox" id="S_Ac" onclick="acAll('S_Ac')"  checked><label for="S_Ac" ></label></div> 
                  </div>
+                 </div>
+                 <div class="status_box">
+                  <div class="topic"><p>Sirenes Auto Reset</p></div>
+                  <div class="option">  <div class="toggle">
+                  <input type="checkbox" id="S_Dis" checked><label for="S_Dis" ></label></div> 
+               </div>
                 </div>
-          
+                <div class="status_box" id="set_timer_time_box">
+                  <div class="topic"><p id="label_timer_time" >Sirens Reset Time</p></div>
+                  <div class="option" ><div class="custom-select" style=" margin-top:12.6px;margin-bottom: 12.6px;">
+                    <select name="time" id="time">
+                      <option value="volvo">10sec</option>
+                      <option value="saab">20sec</option>
+                      <option value="opel">30sec</option>
+                      <option value="audi">1 min</option>
+                      <option value="audi">2 min</option>
+                      <option value="audi">3 min</option>
+                      <option value="audi">4 min</option>
+                      <option value="audi">5 min</option>
+                    </select><label for="set_timer_time" id="toggleLabel_set_timer_time_mainpump"></label></div> 
+            
             </div>
+          </div>
+
+          <div id="overlay2"></div>
+
+            </div>
+            
+          </div>
+
+          <div id="overlay"></div>
     <div id="popup" class="popup">
         <div style="padding: 20px;">   <div class="popup-content">
           <p>Are you sure you want to disarmed this siren?</p>  </div></div>
@@ -300,16 +356,16 @@ color:blue;
           <div id="noButton"><p>No</p></div>
             <div id="yesButton"><p>Yes</p></div></div>
       </div>
-      <div id="overlay"></div>
+  
 
       <div id="popup2" class="popup2" >
         <div class="popup2-content" >
-          <p style=" font-size: 12px;">siren.................................!</p>
-
+          <p style=" font-size: 12px;">siren  disarm!</p>
+        
         </div>
       </div>
 
-    
+     
     <script>
 
 var payload;
@@ -340,7 +396,7 @@ document.getElementById('yesButton').addEventListener('click', function() {
   document.getElementById(('m' + i)).style.display = "inline";
 }
   }
-  openPopup()
+  openPopup();
 });
 
 document.getElementById('noButton').addEventListener('click', function() {
@@ -392,6 +448,18 @@ function openPopup() {
   }, 1300); 
   
 }
+
+
+
+document.getElementById('S_Dis').addEventListener('click', function() {
+
+  if(this.checked){
+          document.getElementById("time").style.display="inline";
+          document.getElementById("label_timer_time").style.display="inline"; 
+        }else{
+          document.getElementById("time").style.display="none";
+          document.getElementById("label_timer_time").style.display="none"; }
+  });
 
     </script>
 </body>

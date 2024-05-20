@@ -5,14 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../resources\css\flood.css">
-    <script src="../resources/js/paho-mqtt-min.js"></script>
+    <script src="../resources\js\paho.javascript-1.0.3\paho-mqtt-min.js"></script>
     <script src="../resources/js/connection.js"></script>
     <style >
 
-.gui{width: 100%;height: 500px;  background-image: url('../resources/image/.jpeg');background-size: cover; }
-    
-
+      
     html, body {
      margin: 0;
      height: 100%;
@@ -20,24 +17,26 @@
     
     }
     body{  background:white; font-family: 'Avenir';
-    font-family: sans-serif;
-    touch-action: pan-y;}
+    font-family: sans-serif;}
+    #gui{width: 92.5%;height: 320px; margin: 0 auto; border:px solid; position: relative;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px;}
+    
 
     #container {
-     position: relative;
+     position: absolute;
      width: 10vw;
-     top: 10%;
-    /*  left: 50%;
-     transform: translate3d(-50%, -50%, 0);*/
-     margin: 0 auto;
+     height: 250px;
+     top: 50%;
+     left: 50%;
+     transform: translate3d(-50%, -50%, 0);
+   
 
     }
     input {
      display: none;
     }
     #container label {
-      margin-top: -70%;
-     position: relative;
+    
+     position: absolute;
      display: block;
      width: 10vw;
      height :250px;
@@ -54,31 +53,24 @@
     }
     #water_level
     {
-      left:5px;
+      left:7px;
       position: absolute;
-      width: 8vw;
+      width: 40px;
       height: 100%;
-      border: .2vw solid gray;
-      border-radius: 1vw;
-      box-shadow: inset  0 0 0 .6vw white;
+      border: 2px solid gray;
+      border-radius: 3px;
+      box-shadow: inset  0 0 0 2px  white;
 
     }
     #fill{
       position: absolute;
       width: 100%;
-      height: 1.2%; /*should 98.5%*/
+      height: 1%; /*should 98.5%*/
       z-index: -1;
       background-color: #018FFB;
-      bottom: .3%;
-      border-radius:2vw;
-
-    
-
+      bottom: 2px;
+      border-radius:3px;
     }
-    
-
-
-
     .level {
      position: absolute;
      font-size: 0.7rem;
@@ -153,9 +145,13 @@
     .toggle input[type="checkbox"]:checked + label:before { background: #4BD865;}
     .toggle input[type="checkbox"]:checked + label:after {left: 30px;}
     
+    .main_top{color:grey; margin-bottom: 3px; margin-top: 20px;margin-left:1.8vw;}
     
-    
-    .Ac,.Al { width:100%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius: 3px 3px;}
+    .Ac,.Al { width:97%;box-shadow: 0.5px 0.5px 3px 0.5px gray; border-radius:3px; margin: 0 auto; position: relative;}
+
+
+
+
     .status_box {
            padding-left: 20px;
            padding-right: 20px;
@@ -212,21 +208,284 @@
      z-index: 9998;
      cursor: pointer;
     }
+#overlay_gui,#overlay_ac,#overlay_al{
+  /*   position: fixed;*/
+     display: none;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 9998;
+     cursor: pointer;
+     position: absolute;
+   
+    }
+    .signal-bars {display: flex; margin: 2px; }
+ .bar {width: 3px;margin-right: 1px;background-color: #ccc;}
+
+
+
+    @media only screen and (min-width: 900px) {
+      
+      body{width: 80%; margin: 0 auto;}
+    }
+
+/* loding css*/
+   
+#loding_box{
+
+position: relative;
+ width: 50px;
+ height: 50px; 
+ border:px solid;
+  top:-50%;
+  left:45% ;
+  z-index: 100;
+  border-radius: 8px;
+  display: none;
+
+
+}
+
+#loding_overlay{
+
+  position: fixed;
+     display: none;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: rgba(0, 0, 0, 0.037);
+     z-index: 99;
+     cursor: pointer;
+}
+
+/*
+
+#loading-bar-spinner.spinner {
+    left: 50%;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -20px;
+    position: absolute;
+    z-index: 190 !important;
+    animation: loading-bar-spinner 400ms linear infinite;
+}
+
+#loading-bar-spinner.spinner .spinner-icon {
+    width: 30px;
+    height: 30px;
+    border:  solid 4px transparent;
+    border-top-color: rgba(128, 128, 128, 0.714) !important;
+    border-left-color:  rgba(128, 128, 128, 0.674) !important;
+    border-radius: 50%;
+   ;
+}
+
+@keyframes loading-bar-spinner {
+  0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
+*/
+
+
+
+div.spinner {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin-left: -40%;
+  margin-right: 50%;
+  background: #51525596;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+div.spinner div {
+  width: 6%;
+  height: 16%;
+  background: #FFF;
+  position: absolute;
+  left: 49%;
+  top: 43%;
+  opacity: 0;
+  -webkit-border-radius: 50px;
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  -webkit-animation: fade 1s linear infinite;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: 1;}
+  to {opacity: 0.25;}
+}
+
+div.spinner div.bar1 {
+  -webkit-transform:rotate(0deg) translate(0, -130%);
+  -webkit-animation-delay: 0s;
+}    
+
+div.spinner div.bar2 {
+  -webkit-transform:rotate(30deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.9167s;
+}
+
+div.spinner div.bar3 {
+  -webkit-transform:rotate(60deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.833s;
+}
+div.spinner div.bar4 {
+  -webkit-transform:rotate(90deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.7497s;
+}
+div.spinner div.bar5 {
+  -webkit-transform:rotate(120deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.667s;
+}
+div.spinner div.bar6 {
+  -webkit-transform:rotate(150deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.5837s;
+}
+div.spinner div.bar7 {
+  -webkit-transform:rotate(180deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.5s;
+}
+div.spinner div.bar8 {
+  -webkit-transform:rotate(210deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.4167s;
+}
+div.spinner div.bar9 {
+  -webkit-transform:rotate(240deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.333s;
+}
+div.spinner div.bar10 {
+  -webkit-transform:rotate(270deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.2497s;
+}
+div.spinner div.bar11 {
+  -webkit-transform:rotate(300deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.167s;
+}
+div.spinner div.bar12 {
+  -webkit-transform:rotate(330deg) translate(0, -130%); 
+  -webkit-animation-delay: -0.0833s;
+}
+
+
+
+
+
+
+
+#info_icon
+{
+  padding-left: 5.5px;
+  padding-right: 5.5px;
+  padding-top: .5px;
+  padding-bottom: .5px; 
+  border: 1.5px solid;
+  border-radius:50%; 
+  font-size: 11px;
+  color:gray;
+  font-weight:bold;
+  
+}
+
+[data-tooltip] {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+
+
+[data-tooltip]::before,
+[data-tooltip]:after {
+  transition: all .4s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -90px;
+  padding: 12px;
+  width: 160px;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  background-color:  rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 12px;
+  line-height: 21px;
+  border-radius: 3px;
+}
+
+
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  margin-left: -3px;
+  width: 0;
+  border-top: 5px solid  rgba(0, 0, 0, 0.7);
+  border-top: 5px solid  rgba(0, 0, 0, 0.7);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Tooltip visible on hover */
+[data-tooltip].hover-effect:before,
+[data-tooltip].hover-effect:after,
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  transition: all .5s ease-in-out;
+  visibility: visible;
+  opacity: 1;
+}
+
+
     </style>
 
 
 </head>
 <body>
-    <div class="gui">
+  
     <table style="width: 100%;"><tr>
         <td><a href="../index.html"><img src="../resources\image\less-than.png" style="width: 30px; height: 35px;"></a></td>
         <td style="text-align: center; width:100%;"><h2 >Flood Monitoring Systems</h2></td>
       </tr></table>
-  
 
+        <table style="width: 93%; margin: 0 auto;"><tr style="width: 90%;"><td  style="width: 50%;"><td style="width: 50%; text-align: right;">
+        <p style="font-size: 13px; color:rgb(156, 156, 156) ; display: inline;" id="offline">offline</p> 
+        <p style="font-size: 13px; color:#7BDD0A; display: none;" id="online"> online </p></td>
+        <td>
+          <div class="signal-bars" id="signalBars">
+            <div class="bar" id="bar1" style="height:2px; margin-top:8px;"></div>
+            <div class="bar" id="bar2"style="height:4px;margin-top:6px;" ></div>
+            <div class="bar" id="bar3"style="height:6px;margin-top:4px;"></div>
+            <div class="bar" id="bar4"style="height:8px;margin-top:2px;"></div>
+            <div class="bar" id="bar5"style="height:10px;"></div>
+        </div></td></tr></table>
+  
+      <div id="gui">
+        <div class="gui2">
         <div id="container">
-           <div  id="water_level">   <div id="fill"></div></div>
-            <label for="water"> </label>
+           <div  id="water_level"><div id="fill"></div></div>
+            <label for="water"></label>
       
             <span class="level">Warning Level-</span>
             <span class="level">Critical Level-</span>
@@ -236,43 +495,69 @@
         <!-- <span id="progress">0%</span>-->
           </div>
 
-    </div>
-      <div style="width: 95%; margin: 0 auto; margin-top: -35%;">
-    <p style="color:grey; margin-bottom: 3px; margin-top: 30px;"><b>Alert</b></p>
+        </div>
+        <div id="overlay_gui"></div>
+
+        </div>
+      <div style="width: 95%; margin: 0 auto;">
+    <p class="main_top"><b>Alert</b></p>
     
     <div class="Al">
     <div class="status_box">
-        <div class="topic"><p>Critical Level Alert</p></div>
+        <div class="topic"><p>Critical Level Alert
+          <a data-tooltip="write the description here....." id="info_box1" onclick="infoBox('info_box1')"><span id="info_icon">i</span></a>
+
+        </p></div>
         <div class="option">  <div class="toggle">
-        <input type="checkbox" id="c_al" onclick="actionClose('c_al')" ><label for="c_al" ></label></div> 
+        <input type="checkbox" id="c_al" onclick="actionClose('c_al')"><label for="c_al" ></label></div> 
      </div>
     </div>
 
     <div class="status_box">
-        <div class="topic"><p>Warning Level Alert</p></div>
+        <div class="topic"><p>Warning Level Alert
+          <a data-tooltip="write the description here....." id="info_box2" onclick="infoBox('info_box2')"><span id="info_icon">i</span></a>
+
+          
+            
+        </p></div>
         <div class="option">  <div class="toggle">
         <input type="checkbox" id="w_al" onclick="actionClose('w_al')" ><label for="w_al" ></label></div> 
      </div>
     </div>
+    <div id="overlay_al"></div>
+
 </div>
     
-<p style="color:grey; margin-bottom: 3px; margin-top: 30px;"><b>Action</b></p>
+<p  class="main_top"><b>Action</b></p>
 
              <div class="Ac">
            
                      <div class="status_box">
-                        <div class="topic"><p>Critical Level  Action</p></div>
+                        <div class="topic"><p>Critical Level  Action
+                          
+                            <a data-tooltip="write the description here.....write the description here write the description here" id="info_box3" onclick="infoBox('info_box3')"><span id="info_icon">i</span></a>
+                       
+                        </p>
+
+                        
+                        </div>
                         <div class="option">  <div class="toggle">
-                        <input type="checkbox" id="c_ac" onclick="actionClose('c_ac')" checked><label for="c_ac" ></label></div> 
+                        <input type="checkbox" id="c_ac" onclick="actionClose('c_ac')" ><label for="c_ac" ></label></div> 
                      </div>
                     </div>
                     <div class="status_box">
-                        <div class="topic"><p>Warning Level  Action</p></div>
+                        <div class="topic"><p>Warning Level  Action
+
+                              <a data-tooltip="write the description here....." id="info_box4" onclick="infoBox('info_box4')"><span id="info_icon">i</span></a>
+
+
+                        </p>
+                        </div>
                         <div class="option">  <div class="toggle">
-                        <input type="checkbox" id="w_ac" onclick="actionClose('w_ac')" ><label for="w_ac" ></label></div> 
+                        <input type="checkbox" id="w_ac" onclick="actionClose('w_ac')"  ><label for="w_ac" ></label></div> 
                      </div>
                     </div>
-
+                    <div id="overlay_ac"></div>
                 </div>
                
 </div> 
@@ -286,15 +571,41 @@
       <div id="yesButton"><p>Yes</p></div></div>
 </div>
 <div id="overlay"></div>
+<div id="loding_overlay"></div>
+<div id="loding_box" >
 
+<!--<div id="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+<div id="loading-bar-spinner" class="spinner"><div class="spinner-icon"></div></div>-->
+<div class="spinner">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+  <div class="bar4"></div>
+  <div class="bar5"></div>
+  <div class="bar6"></div>
+  <div class="bar7"></div>
+  <div class="bar8"></div>
+  <div class="bar9"></div>
+  <div class="bar10"></div>
+  <div class="bar11"></div>
+  <div class="bar12"></div>
+</div>
+</div>
 <script>
 
-var id1Value,id1,payload;
-payload, companyID="node", deviceType="wlc",deviceID="8469308fcf871dad4d4" ;
-var publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/";// publish topic
-var subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+";// subscribe topic
+var id1Value,id1,payload,topic, timer,stat,
+companyID="node", deviceType="lls2",deviceID="923714-42180e2de6b4",
+publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/",// publish topic
+subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+",// subscribe topic
+level=document.getElementById('fill'),
+c_al=document.getElementById('c_al');
+w_al=document.getElementById('w_al');
+w_ac=document.getElementById('w_ac');
+c_ac=document.getElementById('c_ac');
+gui=document.getElementById('gui');
 
-
+var d=0;
 
 function connect(){
 try{
@@ -306,11 +617,11 @@ client.onMessageArrived = onMessageArrived;
 
 function onConnect() {
     console.log("onConnect");    
-     //  client.subscribe(subTopic);
-    //   sendCommandToDevice(publish_topic+"info","read");
+      client.subscribe(subTopic);
+     sendCommandToDevice(publish_topic+"info","read");
 }
 
-/*function sendCommandToDevice(topic,payload) {
+function sendCommandToDevice(topic,payload) {
   try{
     if (client.isConnected()) {
         console.log("sendCommandToDevice: " + topic + ", Payload: " + payload);
@@ -322,17 +633,24 @@ function onConnect() {
     {
       console.log(error);
     }
-}*/
+}
 
 
 function onMessageArrived(message) {
   try{
-  // onlinestatus();
+   onlinestatus();
   topic = message.destinationName;
   payload=message.payloadString;
     console.log("Payload:" + payload);
     console.log("Topic:", topic);
-   // displayFunction(payload);  
+   displayFunction(payload); 
+
+   setTimeout(function(){
+    document.getElementById("loding_overlay").style.display="none";
+      document.getElementById("loding_box").style.display="none";
+     // document.getElementById("lds-ring").style.display="none";
+       },300);
+   
   }
   catch(error)
   {
@@ -343,50 +661,324 @@ function onMessageArrived(message) {
 function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log("onConnectionLost:"+responseObject.errorMessage);
-    //offlinestatus('offline');
+    offlinestatus('offline');
   }
   
 }
 
+function onlinestatus()
+{
+  document.getElementById("online").style.display="inline";
+  document.getElementById("offline").style.display="none";
+  document.getElementById("overlay_gui").style.display="none";
+  document.getElementById("overlay_ac").style.display="none";
+  document.getElementById("overlay_al").style.display="none";
+
+
+}
+function offlinestatus(stat)
+{
+  if(stat === 'offline'){  document.getElementById("offline").style.color="#FF3827";}
+
+  document.getElementById("online").style.display="none";
+  document.getElementById("offline").style.display="inline";
+
+  document.getElementById("overlay_gui").style.display="block";
+  document.getElementById("overlay_ac").style.display="block";
+  document.getElementById("overlay_al").style.display="block";
+
+
+for(var x = 0; x < bar.length; x++)
+{
+bar[x].style.backgroundColor = "#ccc";
+}
+
+}
+
+function displayFunction(payload)
+{
+  payload = JSON.parse(payload);
+
+ // var v=payload.triggers[1]+payload.triggers[0]
+ // console.log(v);
+
+ v1 = (payload.triggers[0] === 1) ? 8 : (payload.triggers[0] === 0 ? 0 : v1);
+ v2 = (payload.triggers[1] === 1) ? 4 : (payload.triggers[1] === 0 ? 0 : v2);
+ v3 = (payload.triggers[2] === 1) ? 2 : (payload.triggers[2] === 0 ? 0 : v3);
+ v4 = (payload.triggers[3] === 1) ? 1 : (payload.triggers[3] === 0 ? 0 : v4);
+
+ v=v1+v2+v3+v4;
+ console.log(v);
+
+      stat=payload['stat'];
+
+      switch (stat)
+      {
+        case "online":
+          onlinestatus();
+          break;
+        case "offline":
+        offlinestatus(stat);
+          break;
+      }
+      updateSignalStrength(payload['rssi'],payload['stat']);//rssi
+
+  if(stat == 'online')
+  {
+    
+    if (payload.levels[0] == '0' &&  payload.levels[1] == '0' ) 
+    {
+      level.style.height="1%";
+      gui.style.boxShadow = "0.5px 0.5px 3px 0.5px gray;";
+
+    }
+    if (payload.levels[0] == '0' &&  payload.levels[1] == '1') 
+    {
+      level.style.height="50%";
+      gui.style.boxShadow = ".5px .5px 4px 2px #FF9200";
+
+    }
+    if ( payload.levels[0] == '1' &&  payload.levels[1] == '0') 
+    {
+      level.style.height="99%";
+      gui.style.boxShadow = ".5px .5px 4px 2px red";
+
+    }
+    if ( payload.levels[0] == '1' &&  payload.levels[1] == '1') 
+    {
+      level.style.height="99%";
+      gui.style.boxShadow = ".5px .5px 4px 2px red";
+
+    }
+
+   if( payload.triggers && payload.triggers.length > 0){
+    switch (payload.triggers[0] )
+   {
+    case 0:
+    w_ac.checked=false;
+ 
+     break;
+    case 1:
+    w_ac.checked=true;
+
+    break;
+
+   }
+   switch (payload.triggers[1] )
+   {
+    case 0:
+    c_ac.checked=false;
+     break;
+    case 1:
+    c_ac.checked=true;
+
+    break;
+
+   }
+
+   switch (payload.triggers[2] )
+   {
+    case 0:
+    w_al.checked=false;
+ 
+     break;
+    case 1:
+    w_al.checked=true;
+
+    break;
+
+   }
+   switch (payload.triggers[3] )
+   {
+    case 0:
+    c_al.checked=false;
+     break;
+    case 1:
+    c_al.checked=true;
+
+    break;
+ }
+ }
+  }   
+}
+
+      function add(sum){
+       var d2=v+sum;
+      sendCommandToDevice(topic, d2.toString());
+       }
+
+    var bar=  document.getElementsByClassName("bar");  //signal bar.
+    function updateSignalStrength(rssi,stat) {
+    if(stat === 'online'){
+      if (rssi >= -50) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+    bar[3].style.backgroundColor = "#565461";
+    bar[4].style.backgroundColor = "#565461";
+} else if (rssi >= -55) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+    bar[3].style.backgroundColor = "#565461";
+} else if (rssi >= -65) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+} else if (rssi >= -80) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+} else if (rssi >= -85) {
+    bar[0].style.backgroundColor = "#565461";
+} else if (rssi >= -100) {
+}
+    }
+    }
 
 
 
 
+
+
+
+
+    //
+
+    ///////////////////////////////////////////////////////////////////////////
   function actionClose(id1){
+    topic=publish_topic+"triggers/set";
+    id1Value=id1;
     var checkbox = document.getElementById(id1)
-    if (!checkbox.checked) {
+  
+    if (checkbox.checked){
+
+      if (id1Value == 'c_al') {
+        document.getElementById(id1Value).checked = true;
+         v=v+1;
+      clearTimeout(timer); 
+      
+    }
+    if (id1Value == 'w_al') {
+        document.getElementById(id1Value).checked = true;
+        v=v+2;
+    clearTimeout(timer); 
+      
+    }
+
+    if (id1Value == 'c_ac') {
+        document.getElementById(id1Value).checked = true;
+         v=v+4;
+      
+        clearTimeout(timer); 
+      
+    }
+    if (id1Value == 'w_ac') {
+        document.getElementById(id1Value).checked = true;
+        v=v+8;
+     clearTimeout(timer); 
+      
+    }
+    console.log("v :"+v);
+
+     timer=setTimeout(function() {
+      document.getElementById("loding_overlay").style.display="block";
+      document.getElementById("loding_box").style.display="block";
+  
+             sendCommandToDevice(topic, v.toString());
+                 }, 800); 
+
+
+
+
+    }
+    else if (!checkbox.checked) {
         document.getElementById('popup').style.display = 'block';
         document.getElementById("overlay").style.display = "block";   
     }
-    else{
-      payload="1";
-    }
-    id1Value=id1;
-    console.log(payload);
+
   }
 document.getElementById('yesButton').addEventListener('click', function() {
- 
+    topic=publish_topic+"triggers/set";
     document.getElementById('popup').style.display = 'none';
     document.getElementById("overlay").style.display = "none";
-    if (id1Value) {
+    if (id1Value == 'c_al') {
         document.getElementById(id1Value).checked = false;
-        payload="0";
+        var d2=v-1;
+        clearTimeout(timer); 
     }
-    console.log(payload);
+    if (id1Value == 'w_al') {
+        document.getElementById(id1Value).checked = false;
+        var d2=v-2;
+        clearTimeout(timer); 
+    }
+
+    if (id1Value == 'c_ac') {
+        document.getElementById(id1Value).checked = false;
+        var d2=v-4;
+        clearTimeout(timer); 
+      
+    }
+    if (id1Value == 'w_ac') {
+        document.getElementById(id1Value).checked = false;
+        var d2=v-8;
+        clearTimeout(timer); 
+    }
+        
+    //sendCommandToDevice(topic, d2.toString());
+
+    timer=setTimeout(function() {
+      document.getElementById("loding_overlay").style.display="block";
+      document.getElementById("loding_box").style.display="block";
+  
+             sendCommandToDevice(topic, d2.toString());
+                 }, ); 
+
+    
+   
 });
 
 document.getElementById('noButton').addEventListener('click', function() {
-
+    topic=publish_topic+"triggers/set";
     document.getElementById('popup').style.display = 'none';
     document.getElementById("overlay").style.display = "none";
-    if (id1Value) {
-        document.getElementById(id1Value).checked = true;
-        payload="1";
+    id1Value=document.getElementById(id1Value);
+    if(id1Value)
+    {
+    id1Value.checked = true;
+
     }
-    console.log(payload);
+   
 });
 
+function infoBox(id) {
+    var element = document.getElementById(id);
+    if (element) {
+      element.classList.add('hover-effect');
+
+      document.addEventListener('click', function handleClickOutside(event) {
+        if (!element.contains(event.target)) {
+          element.classList.remove('hover-effect');
+          document.removeEventListener('click', handleClickOutside);
+        }
+      });
+
+      document.addEventListener('touchstart', function handleTouchOutside(event) {
+        if (!element.contains(event.target)) {
+          element.classList.remove('hover-effect');
+          document.removeEventListener('touchstart', handleTouchOutside);
+        }
+      });
+    }
+  }
+
 connect();
+
+setTimeout(function() {
+  if(stat !== 'online'){
+  offlinestatus('none');}
+   }, 1000);
+
+setInterval(connect, 2000);
 
     </script>
 </body>
