@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
+    <script src="../resources/js/connection.js"></script>
     <style>
-     .container_main{box-shadow: 0.5px 0.5px 3px 0.5px gray; width: 95%; height: 85vw; position:relative; margin: 0 auto;}
+        body{margin: 0 auto; width: 100%;}
+        .container_main{box-shadow: 0.5px 0.5px 3px 0.5px gray; width: 95%; height: 85vw; position:relative; margin: 0 auto;}
         .container {
             position:relative;
             width: 70%;
             margin: 0 auto;
-          /*border: 15px solid #BBCDD9;
-            border-radius:0 ;
-       
-            left:15%;*/
             top:11%;
             
         }
@@ -50,7 +49,6 @@
             border-radius: 2vw;
             border-width: .5vw;
             border-color: gray;
-
             transform: translateX(-50%);
       
         }
@@ -61,8 +59,6 @@
             border-width: .5vw;
             border-color: gray;
             transform: translateX(-50%);
-         
-          
          
         }
 
@@ -186,7 +182,21 @@ color:blue;
 
     color:black;
 }
-#overlay {
+
+#overlay2,#overlay3 {
+  /*   position: fixed;*/
+     display:none;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 9998;
+     cursor: pointer;
+     position: absolute;
+   
+    }
+    #overlay {
   position: fixed;
   display: none;
   width: 100%;
@@ -199,30 +209,98 @@ color:blue;
   z-index: 9998;
   cursor: pointer;
 }
+.signal-bars {display: flex; margin: 2px; }
+ .bar {width: 3px;margin-right: 1px;background-color: #ccc;}
+  
+ #s1,#s2,#s3,#s4{
+    position: absolute;
+    top: 40%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    height: 70%;
+    display:inline ;
+    fill: green;
+    width: 70%;
+  }
+#m1,#m2,#m3,#m4
+{
+   position: absolute;
+   width: 6.5vw; 
+   height: 6.5vw;
+   top: 40%;
+   left: 50%;
+   display: none;
+   margin-top: 1.5%;
+   transform: translate(-50%, -50%);
 
-#overlay,#overlay2 {
-  /*   position: fixed;*/
-     display:none;
-     width: 100%;
-     height: 100%;
-     top: 0;
-     left: 0;
-     background-color: rgba(0,0,0,0.5);
-     z-index: 9998;
-     cursor: pointer;
-   /*  position: absolute;*/
+}
+
+@media only screen and (min-width: 900px) {
+      
+      body{width: 80%; margin: 0 auto;}
+
+      
+      .siren1 {
+         
+         border-style: solid; width: 12vw; height: 12vw; position: absolute; left:51.5%; top:-4.5%;
+         border-radius: 2vw;
+         border-width: .5vw;
+         border-color: gray;
+
+         transform: translateX(-50%);
+
+     }
+
+     .siren2 {
+     
+         border-style: solid; width: 12vw; height: 12vw; position: absolute; left:101%; top:30%;
+         border-radius: 2vw;
+         border-width: .5vw;
+         border-color: gray;
+
+         transform: translateX(-50%);
+    
+     }
+     .siren3 {
+         border-style: solid; width: 12vw; height: 12vw; position: absolute; left:45.5%; top:79.7%;
+         border-radius: 2vw;
+         border-width: .5vw;
+         border-color: gray;
+
+         transform: translateX(-50%);
    
-    }
+     }
 
+     .siren4 {
+         border-style: solid; width: 12vw; height: 12vw; position: absolute; left:-1.5%; top:31%;
+         border-radius: 2vw;
+         border-width: .5vw;
+         border-color: gray;
+         transform: translateX(-50%);
+      
+     }
+    }
     </style>
 </head>
 <body>
     <table style="width: 100%;">
         <tr>
-            <td><a href="../index.html"><img src="../resources\image\less-than.png" style="width: 30px; height: 35px;"></a></td>
+            <td><a href="../index.html"><img src="../resources\image\siren\less-than.png" style="width: 30px; height: 35px;"></a></td>
             <td style="text-align: center; width:100%;"><h2>Siren Monitoring Systems</h2></td>
         </tr>
     </table>
+    
+    <table style="width: 93%; margin: 0 auto;"><tr style="width: 90%;"><td  style="width: 50%;"><td style="width: 50%; text-align: right;">
+      <p style="font-size: 13px; color:rgb(156, 156, 156) ; display: inline;" id="offline">offline</p> 
+      <p style="font-size: 13px; color:#7BDD0A; display: none;" id="online"> online </p></td>
+      <td>
+        <div class="signal-bars" id="signalBars">
+          <div class="bar" id="bar1" style="height:2px; margin-top:8px;"></div>
+          <div class="bar" id="bar2"style="height:4px;margin-top:6px;" ></div>
+          <div class="bar" id="bar3"style="height:6px;margin-top:4px;"></div>
+          <div class="bar" id="bar4"style="height:8px;margin-top:2px;"></div>
+          <div class="bar" id="bar5"style="height:10px;"></div>
+      </div></td></tr></table>
 
 
     <svg  height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" display="none">        <!-- Alarm Icon -->
@@ -270,44 +348,43 @@ color:blue;
     <div class="container" >
         <img id="image" src="../resources\image\siren\i.jpg">
         <div class="siren1">
-            <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); height: 70%; display:non " id='s1' fill="green" onclick="actionClose('s1','m1')">
+            <svg id='s1' onclick="actionClose('s1','m1')">
                 <use xlink:href="#alarm-icon"></use>
             </svg>
-            <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m1">
+            <img src="../resources\image\siren\unm.svg"  id="m1">
         
             <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
         </div>
            
             <div  class="siren2">
-                <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s2' fill="green" onclick="actionClose('s2','m2')">
+                <svg id='s2'  onclick="actionClose('s2','m2')">
                     <use xlink:href="#alarm-icon"></use>
                 </svg>
-                <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m2">
+                <img src="../resources\image\siren\unm.svg" id="m2">
                 <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
 
             </div>
    
 
             <div  class="siren3">
-                <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s3' fill="green" onclick="actionClose('s3','m3')">
+                <svg id='s3' onclick="actionClose('s3','m3')">
                     <use xlink:href="#alarm-icon"></use>
                 </svg>
-                <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m3">
+                <img src="../resources\image\siren\unm.svg" id="m3">
                 <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
             </div>
        
                 <div class="siren4">
-                    <svg style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 70%; display:non " id='s4' fill="green" onclick="actionClose('s4','m4')">
+                    <svg id='s4' onclick="actionClose('s4','m4')">
                         <use xlink:href="#alarm-icon"></use>
                     </svg>
-                    <img src="../resources\image\siren\unm.svg" style="position: absolute; width: 6.5vw; height: 6.5vw; top: 40%; left: 50%; display: none; margin-top: 1.5%; transform: translate(-50%, -50%);" id="m4">
+                    <img src="../resources\image\siren\unm.svg" id="m4">
                     <div class="dot" id="node/spc/7469308fcf871dad4d4"></div>
                 </div>
     
               
             </div>
-
-            <div id="overlay"></div>
+            <div id="overlay3"></div>
           </div>
 <br><br>
             <div style="width: 95%; margin: 0 auto;">
@@ -346,9 +423,7 @@ color:blue;
 
             </div>
             
-          </div>
-
-          <div id="overlay"></div>
+          </div><br>
     <div id="popup" class="popup">
         <div style="padding: 20px;">   <div class="popup-content">
           <p>Are you sure you want to disarmed this siren?</p>  </div></div>
@@ -361,15 +436,171 @@ color:blue;
       <div id="popup2" class="popup2" >
         <div class="popup2-content" >
           <p style=" font-size: 12px;">siren  disarm!</p>
-        
+
         </div>
       </div>
 
-     
+    
+      <div id="overlay"></div>
     <script>
 
+var id1Value,id1,payload,topic, timer,stat,d=0,bar,
+companyID="node", deviceType="bsa",deviceID="8983514-da13896f6480",
+//publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/",// publish topic
+subTopic = companyID+"/"+deviceType+"/"+"+/"+deviceID+"/+";// subscribe topic
+
+
+
+
+
+function connect(){
+try{
+client.connect({ onSuccess: onConnect,useSSL: mqttUseSSL,userName,password });
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
+
+}catch{}}
+
+function onConnect() {
+    console.log("onConnect");    
+      client.subscribe(subTopic);
+    // sendCommandToDevice(publish_topic+"info","read");
+}
+
+function sendCommandToDevice(topic,payload) {
+  try{
+    if (client.isConnected()) {
+        console.log("sendCommandToDevice: " + topic + ", Payload: " + payload);
+        var message = new Paho.MQTT.Message(payload);
+        message.destinationName = topic;
+        client.send(message);
+    }}
+    catch(error)
+    {
+      console.log(error);
+    }
+}
+
+
+function onMessageArrived(message) {
+  try{
+   onlinestatus();
+  topic = message.destinationName;
+  payload=message.payloadString;
+    console.log("Payload:" + payload);
+    console.log("Topic:", topic);
+   displayFunction(payload); 
+
+  }
+  catch(error)
+  {
+    console.log(error);
+  } 
+}
+
+function onConnectionLost(responseObject) {
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+    offlinestatus('offline');
+  }
+  
+}
+
+function onlinestatus()
+{
+  document.getElementById("online").style.display="inline";
+  document.getElementById("offline").style.display="none";
+  document.getElementById("overlay2").style.display="none";
+  document.getElementById("overlay3").style.display="none";
+
+
+}
+function offlinestatus(stat)
+{
+  if(stat === 'offline'){  document.getElementById("offline").style.color="#FF3827";}
+
+  
+  document.getElementById("online").style.display="none";
+  document.getElementById("offline").style.display="inline";
+  document.getElementById("overlay2").style.display="block";
+  document.getElementById("overlay3").style.display="block";
+
+
+
+
+for(var x = 0; x < bar.length; x++)
+{
+bar[x].style.backgroundColor = "#ccc";
+}
+
+}
+
+
+function displayFunction(payload)
+{
+  payload = JSON.parse(payload);
+  stat=payload['stat'];
+
+switch (stat)
+{
+  case "online":
+    onlinestatus();
+    break;
+  case "offline":
+  offlinestatus(stat);
+    break;
+}
+updateSignalStrength(payload['rssi'],payload['stat']);//rssi
+
+
+
+}
+
+ bar=  document.getElementsByClassName("bar");  //signal bar.
+    function updateSignalStrength(rssi,stat) {
+    if(stat === 'online'){
+      if (rssi >= -50) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+    bar[3].style.backgroundColor = "#565461";
+    bar[4].style.backgroundColor = "#565461";
+} else if (rssi >= -55) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+    bar[3].style.backgroundColor = "#565461";
+} else if (rssi >= -65) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+    bar[2].style.backgroundColor = "#565461";
+} else if (rssi >= -80) {
+    bar[0].style.backgroundColor = "#565461";
+    bar[1].style.backgroundColor = "#565461";
+} else if (rssi >= -85) {
+    bar[0].style.backgroundColor = "#565461";
+} else if (rssi >= -100) {
+}
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var payload;
-  function actionClose(id1,img){
+function actionClose(id1,img){
 
         document.getElementById('popup').style.display = 'block';
         document.getElementById("overlay").style.display = "block";
@@ -461,6 +692,15 @@ document.getElementById('S_Dis').addEventListener('click', function() {
           document.getElementById("label_timer_time").style.display="none"; }
   });
 
+
+  connect();
+
+  setTimeout(function() {
+  if(stat !== 'online'){
+  offlinestatus('none');}
+   }, 1000);
+
+setInterval(connect, 2000);
     </script>
 </body>
 </html>

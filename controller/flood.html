@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../resources\js\paho.javascript-1.0.3\paho-mqtt-min.js"></script>
+    <link rel="stylesheet" href="../resources\css\flood.css">
+    <script src="../resources/js/paho.javascript-1.0.3/paho-mqtt-min.js"></script>
     <script src="../resources/js/connection.js"></script>
     <style >
 
@@ -263,34 +264,6 @@ position: relative;
      cursor: pointer;
 }
 
-/*
-
-#loading-bar-spinner.spinner {
-    left: 50%;
-    margin-left: -20px;
-    top: 50%;
-    margin-top: -20px;
-    position: absolute;
-    z-index: 190 !important;
-    animation: loading-bar-spinner 400ms linear infinite;
-}
-
-#loading-bar-spinner.spinner .spinner-icon {
-    width: 30px;
-    height: 30px;
-    border:  solid 4px transparent;
-    border-top-color: rgba(128, 128, 128, 0.714) !important;
-    border-left-color:  rgba(128, 128, 128, 0.674) !important;
-    border-radius: 50%;
-   ;
-}
-
-@keyframes loading-bar-spinner {
-  0%   { transform: rotate(0deg);   transform: rotate(0deg); }
-  100% { transform: rotate(360deg); transform: rotate(360deg); }
-}
-*/
-
 
 
 div.spinner {
@@ -380,82 +353,60 @@ div.spinner div.bar12 {
 
 
 
-#info_icon
+.info_icon
 {
   padding-left: 5.5px;
   padding-right: 5.5px;
-  padding-top: .5px;
+  padding-top: 1.2px;
   padding-bottom: .5px; 
-  border: 1.5px solid;
+  border: 2px solid;
   border-radius:50%; 
-  font-size: 11px;
+  font-size: 11.5px;
   color:gray;
   font-weight:bold;
   
 }
 
-[data-tooltip] {
+/*,,,,,,,,,,,,,,,,,,*/
+.tooltip {
   position: relative;
-  z-index: 2;
+  display: inline-block;
   cursor: pointer;
 }
 
-
-[data-tooltip]::before,
-[data-tooltip]:after {
-  transition: all .4s ease-in-out;
+.tooltip .tooltiptext {
   visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-
-[data-tooltip]:before {
+  width: 150px;
+  background-color: #7d63be;
+  color: #fff;
+  text-align:left;
+  border-radius: 6px;
+  padding: 5px 0;
   position: absolute;
-  bottom: 130%;
+  z-index: 1;
+  bottom: 150%;
   left: 50%;
-  margin-bottom: 5px;
-  margin-left: -90px;
-  padding: 12px;
-  width: 160px;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  background-color:  rgba(0, 0, 0, .7);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  content: attr(data-tooltip);
-  text-align: center;
-  font-size: 12px;
-  line-height: 21px;
-  border-radius: 3px;
+  margin-left: -85px;
+font-size: 12px;
+padding: 10px;
+
 }
 
-
-[data-tooltip]:after {
+.tooltip .tooltiptext::after {
+  content: "";
   position: absolute;
-  bottom: 130%;
+  top: 100%;
   left: 50%;
-  margin-left: -3px;
-  width: 0;
-  border-top: 5px solid  rgba(0, 0, 0, 0.7);
-  border-top: 5px solid  rgba(0, 0, 0, 0.7);
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  content: " ";
-  font-size: 0;
-  line-height: 0;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #7D63BE transparent transparent transparent;
 }
-
-/* Tooltip visible on hover */
-[data-tooltip].hover-effect:before,
-[data-tooltip].hover-effect:after,
-[data-tooltip]:hover:before,
-[data-tooltip]:hover:after {
-  transition: all .5s ease-in-out;
-  visibility: visible;
-  opacity: 1;
-}
+.tooltip:hover .tooltiptext,
+.tooltip .tooltiptext.hover-effect {
+      visibility: visible;
+    }
+	
 
 
     </style>
@@ -465,7 +416,7 @@ div.spinner div.bar12 {
 <body>
   
     <table style="width: 100%;"><tr>
-        <td><a href="../index.html"><img src="../resources\image\less-than.png" style="width: 30px; height: 35px;"></a></td>
+        <td><a href="../index.html"><img src="../resources\image\flood\less-than.png" style="width: 30px; height: 35px;"></a></td>
         <td style="text-align: center; width:100%;"><h2 >Flood Monitoring Systems</h2></td>
       </tr></table>
 
@@ -504,22 +455,27 @@ div.spinner div.bar12 {
     
     <div class="Al">
     <div class="status_box">
-        <div class="topic"><p>Critical Level Alert
-          <a data-tooltip="write the description here....." id="info_box1" onclick="infoBox('info_box1')"><span id="info_icon">i</span></a>
+        <div class="topic"><p class="tooltip">Critical Level Alert </p>
 
-        </p></div>
+          <div class="tooltip"id="tooltip-element1" onclick="infoBox('tooltip-element1')">  <span class="info_icon">i</span>
+             <span class="tooltiptext"> "If Critical level alerts have been disable. You will not receive notifications for critical levels." <br><img src="../resources\image\flood\gmil.webp" style="width: 25px; height: 25px; margin-left: 45px; margin-top: 2px;"> &nbsp<img src="../resources\image\flood\sms.webp" style="width: 25px; height: 25px; ">  </span>
+  
+          </div>
+        </div>
         <div class="option">  <div class="toggle">
         <input type="checkbox" id="c_al" onclick="actionClose('c_al')"><label for="c_al" ></label></div> 
      </div>
     </div>
 
     <div class="status_box">
-        <div class="topic"><p>Warning Level Alert
-          <a data-tooltip="write the description here....." id="info_box2" onclick="infoBox('info_box2')"><span id="info_icon">i</span></a>
+        <div class="topic"><p class="tooltip">Warning Level Alert </p>
 
-          
+          <div class="tooltip" id="tooltip-element2" onclick="infoBox('tooltip-element2')">  <span class="info_icon" >i</span>
+            <span class="tooltiptext">"If Warning level alerts have been disable. You will not receive notifications for Warning levels." <br><img src="../resources\image\flood\gmil.webp" style="width: 25px; height: 25px; margin-left: 45px; margin-top: 2px;"> &nbsp<img src="../resources\image\flood\sms.webp" style="width: 25px; height: 25px; "> </span>
+  
+          </div>
             
-        </p></div>
+       </div>
         <div class="option">  <div class="toggle">
         <input type="checkbox" id="w_al" onclick="actionClose('w_al')" ><label for="w_al" ></label></div> 
      </div>
@@ -533,11 +489,13 @@ div.spinner div.bar12 {
              <div class="Ac">
            
                      <div class="status_box">
-                        <div class="topic"><p>Critical Level  Action
+                        <div class="topic"><p class="tooltip">Critical Level  Action</p>
                           
-                            <a data-tooltip="write the description here.....write the description here write the description here" id="info_box3" onclick="infoBox('info_box3')"><span id="info_icon">i</span></a>
-                       
-                        </p>
+                           <div class="tooltip" id="tooltip-element3" onclick="infoBox('tooltip-element3')">  <span class="info_icon">i</span>
+                            <span class="tooltiptext" id="info3" > "If Critical level action have been disable. It will be harm for your Critical level power resources" <br><img src="../resources\image\flood\plugbase.png" style="width: 25px; height: 25px; margin-left: 45px; margin-top: 5px; "> <img src="../resources\image\flood\electricity.png" style="width: 25px; height: 28px; margin-left: 4.5px;"></span>
+                  
+                    </div>
+                 
 
                         
                         </div>
@@ -546,13 +504,16 @@ div.spinner div.bar12 {
                      </div>
                     </div>
                     <div class="status_box">
-                        <div class="topic"><p>Warning Level  Action
-
-                              <a data-tooltip="write the description here....." id="info_box4" onclick="infoBox('info_box4')"><span id="info_icon">i</span></a>
+                        <div class="topic"><p class="tooltip" >Warning Level Action </p>
 
 
-                        </p>
-                        </div>
+                           <div class="tooltip" id="tooltip-element4" onclick="infoBox('tooltip-element4')"><span class="info_icon">i</span>
+                            <span class="tooltiptext">"If Warning level action have been disable. It will be harm for your Warning level power resources"<br><img src="../resources\image\flood\plugbase.png" style="width: 25px; height: 25px; margin-left: 45px;  margin-top: 5px; "> <img src="../resources\image\flood\electricity.png" style="width: 25px; height: 28px; margin-left: 4.5px;"></span>
+                      
+                          </div>
+                       </div>
+
+
                         <div class="option">  <div class="toggle">
                         <input type="checkbox" id="w_ac" onclick="actionClose('w_ac')"  ><label for="w_ac" ></label></div> 
                      </div>
@@ -594,10 +555,12 @@ div.spinner div.bar12 {
 </div>
 <script>
 
-var id1Value,id1,payload,topic, timer,stat,
+var id1Value,id1,payload,topic, timer,stat,d=0,
 companyID="node", deviceType="lls2",deviceID="923714-42180e2de6b4",
 publish_topic=companyID+"/"+deviceType+"/"+"b2n/"+deviceID+"/",// publish topic
 subTopic = companyID+"/"+deviceType+"/"+"n2b/"+deviceID+"/+",// subscribe topic
+
+
 level=document.getElementById('fill'),
 c_al=document.getElementById('c_al');
 w_al=document.getElementById('w_al');
@@ -605,7 +568,7 @@ w_ac=document.getElementById('w_ac');
 c_ac=document.getElementById('c_ac');
 gui=document.getElementById('gui');
 
-var d=0;
+
 
 function connect(){
 try{
@@ -729,25 +692,29 @@ function displayFunction(payload)
     if (payload.levels[0] == '0' &&  payload.levels[1] == '0' ) 
     {
       level.style.height="1%";
-      gui.style.boxShadow = "0.5px 0.5px 3px 0.5px gray;";
+      gui.style.boxShadow ="0.5px 0.5px 3px 0.5px gray";
+      console.log('1');
 
     }
     if (payload.levels[0] == '0' &&  payload.levels[1] == '1') 
     {
       level.style.height="50%";
       gui.style.boxShadow = ".5px .5px 4px 2px #FF9200";
+      console.log('50');
 
     }
     if ( payload.levels[0] == '1' &&  payload.levels[1] == '0') 
     {
       level.style.height="99%";
       gui.style.boxShadow = ".5px .5px 4px 2px red";
+           console.log('99');
 
     }
     if ( payload.levels[0] == '1' &&  payload.levels[1] == '1') 
     {
       level.style.height="99%";
       gui.style.boxShadow = ".5px .5px 4px 2px red";
+      console.log('99 2');
 
     }
 
@@ -950,26 +917,51 @@ document.getElementById('noButton').addEventListener('click', function() {
    
 });
 
-function infoBox(id) {
-    var element = document.getElementById(id);
-    if (element) {
-      element.classList.add('hover-effect');
 
+
+function infoBox(id) {
+  var element=document.getElementById(id);
+    var tooltipText = element.querySelector('.tooltiptext');
+    if (tooltipText) {
+      tooltipText.classList.toggle('hover-effect');
+
+    /*  function handleClickOutside(event) {
+        if (!element.contains(event.target)) {
+          tooltipText.classList.remove('hover-effect');
+          document.removeEventListener('click', handleClickOutside);
+          document.removeEventListener('touchstart', handleTouchOutside);
+        }
+      }
+
+      function handleTouchOutside(event) {
+        if (!element.contains(event.target)) {
+          tooltipText.classList.remove('hover-effect');
+          document.removeEventListener('click', handleClickOutside);
+          document.removeEventListener('touchstart', handleTouchOutside);
+        }
+      }
+*/
       document.addEventListener('click', function handleClickOutside(event) {
         if (!element.contains(event.target)) {
-          element.classList.remove('hover-effect');
+          tooltipText.classList.remove('hover-effect');
           document.removeEventListener('click', handleClickOutside);
         }
       });
 
       document.addEventListener('touchstart', function handleTouchOutside(event) {
         if (!element.contains(event.target)) {
-          element.classList.remove('hover-effect');
+          tooltipText.classList.remove('hover-effect');
           document.removeEventListener('touchstart', handleTouchOutside);
         }
       });
+
+     // document.addEventListener('click', handleClickOutside);
+      //document.addEventListener('touchstart', handleTouchOutside);
     }
   }
+
+
+
 
 connect();
 
