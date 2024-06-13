@@ -127,7 +127,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
         
 			
         </tr>
-        <tr><td id="siren" ontouchstart="addHoverClass('siren')" ontouchend="removeHoverClass('siren')"><div class="dot" id="node/bsa/8983514-da13896f6480" style="width: 5px; height: 5px; float:left;"></div>  <div class="img-container">
+        <tr><td id="siren" ontouchstart="addHoverClass('siren')" ontouchend="removeHoverClass('siren')"><div class="dot" id="node/bsa/16336187-3b45f94dffbc" style="width: 5px; height: 5px; float:left;"></div>  <div class="img-container">
                 <img src="resources\image\siren.jpg" class="img_td" alt="siren">
             </div><p class="device_name"> Home Siren</p><p class="zone">Home</p></td>  
         
@@ -187,7 +187,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
          // Device Topic.....................
          pumpTopic= companyID+"/"+deviceTypePump+"/"+"n2b/"+deviceIDPump+"/+",
          floodTopic= companyID+"/"+deviceTypeFlood+"/"+"n2b/"+deviceIDFlood+"/+",
-		 SirenTopic= companyID+"/"+deviceTypeSiren+"/"+"+/"+deviceIDSiren+"/+",
+		 SirenTopic= companyID+"/"+deviceTypeSiren+"/"+"+/"+"+"+"/+",
 		 s="node/bsa/+/8983514-da13896f6480/+";
 
         function connect(){    
@@ -207,7 +207,7 @@ p.zone{ font-size: 10px; padding-top: 3px;}
           document.getElementById('page1').style.backgroundColor="green";
            getDataFromDevice(pumpTopic); 
            getDataFromDevice(floodTopic); 
-		    getDataFromDevice(s); 
+		    getDataFromDevice(SirenTopic); 
       
         }
         
